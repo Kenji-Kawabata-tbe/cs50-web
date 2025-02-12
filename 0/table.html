@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Table</title>
+        <style>
+            table {
+                border: 1px solid black;
+                border-collapse: collapse; /*表の中のすべての線を折りたたむ*/
+            }
+
+            td, th {
+                border: 1px solid black;
+                padding: 5px;
+            }
+
+            /*
+            th {
+                border: 1px solid black;
+            }
+            */
+
+        </style>
+    </head>
+    <body>
+        <table>
+            <thead> <!-- TableHead?-->
+                <th>Ocean</th>
+                <th>Average Depth</th>
+                <th>Maximum Depth</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Pacific Ocean</td> <!-- TableData-->
+                    <td>4,280</td>
+                    <td>10,911</td>
+                </tr>
+                <tr>
+                    <td>Atlantic Ocean</td>
+                    <td>3,646</td>
+                    <td>8,486</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
