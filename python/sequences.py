@@ -10,7 +10,3 @@ print(names)
 print(names[0])
 print(names[2])
 
-
-
-# dict
-# キー/バリュー

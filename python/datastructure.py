@@ -1,6 +1,6 @@
-# list
+# list(他の言語で言う配列)
 # 値が変更可能な2つ以上の値をもつグループとしての用途が多い
-print("list")
+print("!!!!!!!!!!!!!!list!!!!!!!!!!!!!!")
 
 names = ["Harry", "Ron", "Hermione", "Ginny"]
 
@@ -13,7 +13,7 @@ print(names)
 
 # tuple
 # 値が変わらない2つ以上の値をもつグループとしての用途が多い
-print("tuple")
+print("!!!!!!!!!!!!!!tuple!!!!!!!!!!!!!!")
 coordinate = (10.0, 20.0)
 print(coordinate)
 print(coordinate[1])
@@ -21,7 +21,7 @@ print(coordinate[1])
 # set
 # 同じ値が存在してはだめ
 # 順序を気にせず1度しか出てこない場合に
-print("set")
+print("!!!!!!!!!!!!!!set!!!!!!!!!!!!!!")
 
 s = set()
 s.add(1)
@@ -35,3 +35,20 @@ s.remove(2)
 print(s)
 print(f"The set has {len(s)} elements.")
 
+
+# dict
+# キー/バリュー
+print("!!!!!!!!!!!!!!dict!!!!!!!!!!!!!!")
+houses = {"Harry": "Gryffindor", "Draco": "Slytherin"}
+print(houses["Harry"])
+houses["Hermione"] = "Gryffindor"
+print(houses["Hermione"])
+
+
+# listの中の各要素をdictにすることもできる
+# listの中にlist,dictの中にlistなども可能
+people = [
+    {"name": "Harry", "house": "Gryffindor"},
+    {"name": "Cho", "house": "Ravenclaw"},
+    {"name": "Draco", "house": "Slytherin"}
+]
