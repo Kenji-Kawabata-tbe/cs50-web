@@ -1,4 +1,5 @@
-202050213 32:56
+20250215 19:46
+20250216 24:46
 
 pythonのalias
 vim ~/.config/fish/config.fish
@@ -10,6 +11,14 @@ source ~/mypy/bin/activate.fish # macOS/Linux
 mypy\Scripts\activate     # Windows
 
 # パッケージをインストール
-pip3 install パッケージ名
+pip3 install Django
 
 deactivate
+
+
+django-admin startproject lecture3
+python manage.py runserper
+python manage.py startapp hello
+
+
+
