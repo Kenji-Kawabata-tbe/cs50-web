@@ -1,5 +1,6 @@
 20250215 19:46
 20250216 24:46
+20250217 37:19
 
 pythonのalias
 vim ~/.config/fish/config.fish
