@@ -1,6 +1,7 @@
 20250215 19:46
 20250216 24:46
 20250217 37:19
+20250219 lab done
 
 pythonのalias
 vim ~/.config/fish/config.fish
@@ -16,10 +17,17 @@ pip3 install Django
 
 deactivate
 
-
+# プロジェクト作成
 django-admin startproject lecture3
-python manage.py runserper
+
+# アプリ作成
 python manage.py startapp hello
 
+# lecture3/settings.pyのINSTALLED_APPSにhelloを追加する
+# lecture3/urls.pyのurlpatternsにpath('hello/', include("hello.urls")),を追加する
+# hello/urls.pyを作成し、必要に応じてviews.pyを編集
+
+
+python manage.py runserper
 
 
