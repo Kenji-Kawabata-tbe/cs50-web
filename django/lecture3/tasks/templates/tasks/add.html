@@ -6,6 +6,6 @@
             {% csrf_token %} <!-- これがないとCSRF認証でエラーになる。djangoはデフォルトでCSRF認証がオンになっている-->
             {{ form }}
             <input type="submit">
-    </form>
+        </form>
     <a href="{% url 'tasks:index' %}">View Task</a>
 {% endblock %}
