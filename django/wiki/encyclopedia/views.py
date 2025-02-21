@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django import forms
 from django.http import HttpResponseNotFound
-
+import random
 from . import util
 
 class NewEntryForm(forms.Form):
@@ -57,3 +57,11 @@ def create_entry(request):
         form = NewEntryForm()
 
     return render(request, "encyclopedia/new_entry.html", {"form": form})
+
+def random_entry(request):
+    entries = util.list_entries()  # すべてのエントリーを取得
+    if not entries:
+        return redirect("index")  # エントリーがない場合はホームに戻る
+
+    random_title = random.choice(entries)  # ランダムに1つ選ぶ
+    return redirect("title:index", title=random_title)  # 選ばれたエントリーページへリダイレクト

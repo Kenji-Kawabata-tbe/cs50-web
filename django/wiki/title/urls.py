@@ -6,6 +6,7 @@ app_name = "title"
 
 urlpatterns = [
     #path("", views.index, name="index")
-    path("<str:title>/", views.index, name="index") # <str:title>はtitleの値が動的にpathとして設定されるということ。
+    path("<str:title>/", views.index, name="index"), # <str:title>はtitleの値が動的にpathとして設定されるということ。
+    path("<str:title>/edit", views.edit_entry, name="edit_entry")
 
 ]

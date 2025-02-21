@@ -1,14 +1,14 @@
-<!-- encyclopedia/entry.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-    <h1>{{ title }}</h1>
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <!-- <h1>{{ title }}</h1> -->
     <div>
-        {{ content|safe }}
+        {{ content|safe }}  <!-- Markdown を HTML としてレンダリング -->
     </div>
-</body>
-</html>
+
+    <a href="{% url 'title:edit_entry' title=title %}" class="btn btn-warning mt-3">Edit</a>
+{% endblock %}
