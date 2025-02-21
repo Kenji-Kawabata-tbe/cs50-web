@@ -2,6 +2,7 @@
 20250216 24:46
 20250217 37:19
 20250219 lab done
+20250219 project1 done
 
 pythonのalias
 vim ~/.config/fish/config.fish
