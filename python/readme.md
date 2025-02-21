@@ -1,7 +1,7 @@
 202050213 32:56
 
 pythonのalias
-vim ./.config/fish/config.fish
+vim ~/.config/fish/config.fish
 alias python='python3'
 
 pythonの仮想環境

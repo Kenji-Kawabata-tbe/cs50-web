@@ -1,0 +1,21 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>All Pages</h1>
+
+    <ul>
+        {% for entry in entries %}
+            <!-- title:index --> 
+                <!--titleはtitle/urls.pyのapp_name。異なるアプリでURLが設定されている場合に指定する -->
+                <!--indexはapp_name titleのindex関数という意味 -->
+            <!-- entryはentriesの中の要素 -->
+                <!--title=entryのtitleはtitle:indexの引数でtitleが必要だから-->
+            <a href="{% url 'title:index' title=entry %}">{{ entry }}</a>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
