@@ -137,3 +137,21 @@ def category_list(request, category_name):
     category = get_object_or_404(Category, name=category_name)
     listings = Listing.objects.filter(category=category, is_active=True)
     return render(request, "auctions/category.html", {"listings": listings, "category": category})
+
+@login_required
+def toggle_watchlist(request, listing_id):
+    listing = get_object_or_404(Listing, id=listing_id)
+
+    # 既にウォッチリストにあるかどうかを確認
+    watchlist_item = Watchlist.objects.filter(user=request.user, listing=listing).first()
+
+    if watchlist_item:
+        # 既にウォッチリストにある場合は削除
+        watchlist_item.delete()
+        messages.success(request, "Removed from Watchlist!")
+    else:
+        # なければ新規作成
+        Watchlist.objects.create(user=request.user, listing=listing)
+        messages.success(request, "Added to Watchlist!")
+
+    return HttpResponseRedirect(reverse("listing_page", args=[listing_id]))

@@ -13,11 +13,22 @@
     <p><strong>Owner:</strong> {{ listing.owner.username }}</p>
 
     {% if user.is_authenticated %}
+        <!--
         {% if is_watching %}
             <a href="{% url 'watchlist' %}" class="btn btn-danger">Remove from Watchlist</a>
         {% else %}
             <a href="{% url 'watchlist' %}" class="btn btn-success">Add to Watchlist</a>
         {% endif %}
+        -->
+
+        <form action="{% url 'toggle_watchlist' listing.id %}" method="post" class="d-inline">
+            {% csrf_token %}
+            {% if is_watching %}
+                <button type="submit" class="btn btn-danger">Remove from Watchlist</button>
+            {% else %}
+                <button type="submit" class="btn btn-success">Add to Watchlist</button>
+            {% endif %}
+        </form>
 
         <h3>Place a bid</h3>
         <form action="{% url 'place_bid' listing.id %}" method="post">
