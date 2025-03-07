@@ -25,7 +25,7 @@ django-admin startproject lecture3
 python manage.py startapp hello
 
 # lecture3/settings.pyのINSTALLED_APPSにhelloを追加する
-# lecture3/urls.pyのurlpatternsにpath('hello/', include("hello.urls")),を追加する
+# lecture3/urls.pyのfrom django.urls import pathに includeのimportを追加、urlpatternsにpath('hello/', include("hello.urls")),を追加する
 # hello/urls.pyを作成し、必要に応じてviews.pyを編集
 
 
