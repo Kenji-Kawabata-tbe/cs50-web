@@ -1,0 +1,64 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}{{ listing.title }}{% endblock %}
+
+{% block body %}
+    <h2>{{ listing.title }}</h2>
+    {% if listing.image_url %}
+        <img src="{{ listing.image_url }}" class="img-fluid mb-3" alt="{{ listing.title }}">
+    {% endif %}
+    <p>{{ listing.description }}</p>
+    <p><strong>Current Price:</strong> ${{ highest_bid.amount|default:listing.starting_bid }}</p>
+    <p><strong>Category:</strong> {{ listing.category.name|default:"None" }}</p>
+    <p><strong>Owner:</strong> {{ listing.owner.username }}</p>
+
+    {% if user.is_authenticated %}
+        <!--
+        {% if is_watching %}
+            <a href="{% url 'watchlist' %}" class="btn btn-danger">Remove from Watchlist</a>
+        {% else %}
+            <a href="{% url 'watchlist' %}" class="btn btn-success">Add to Watchlist</a>
+        {% endif %}
+        -->
+
+        <form action="{% url 'toggle_watchlist' listing.id %}" method="post" class="d-inline">
+            {% csrf_token %}
+            {% if is_watching %}
+                <button type="submit" class="btn btn-danger">Remove from Watchlist</button>
+            {% else %}
+                <button type="submit" class="btn btn-success">Add to Watchlist</button>
+            {% endif %}
+        </form>
+
+        <h3>Place a bid</h3>
+        <form action="{% url 'place_bid' listing.id %}" method="post">
+            {% csrf_token %}
+            <input type="number" name="bid" step="0.01" class="form-control mb-2" required>
+            <button type="submit" class="btn btn-primary">Bid</button>
+        </form>
+
+        <h3>Comments</h3>
+        <form action="{% url 'add_comment' listing.id %}" method="post">
+            {% csrf_token %}
+            <textarea name="comment" class="form-control mb-2" required></textarea>
+            <button type="submit" class="btn btn-secondary">Add Comment</button>
+        </form>
+
+        <ul class="list-group mt-3">
+            {% for comment in listing.comments.all %}
+                <li class="list-group-item">
+                    <strong>{{ comment.user.username }}:</strong> {{ comment.content }}
+                </li>
+            {% empty %}
+                <li class="list-group-item">No comments yet.</li>
+            {% endfor %}
+        </ul>
+
+        {% if user == listing.owner and listing.is_active %}
+            <form action="{% url 'close_auction' listing.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger mt-3">Close Auction</button>
+            </form>
+        {% endif %}
+    {% endif %}
+{% endblock %}
