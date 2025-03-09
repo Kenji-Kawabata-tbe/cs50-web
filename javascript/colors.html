@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Colors</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                //document.querySelector('#red').onclick = function() {
+                //    document.querySelector('#hello').style.color = 'red';
+                //}
+                //document.querySelector('#blue').onclick = function() {
+                //    document.querySelector('#hello').style.color = 'blue';
+                //}
+                //document.querySelector('#green').onclick = function() {
+                //   document.querySelector('#hello').style.color = 'green';
+                //}
+
+                //すべてのbuttonを探す。forEachで返ってきた各ボタンに対して関数を実行する
+                document.querySelectorAll('button').forEach(function(button) {
+                    //ボタンがクリックされたら
+                    button.onclick = function() {
+                        //#hello要素を取得し、その色をbutton.dataset.colorに変更する
+                        document.querySelector('#hello').style.color = button.dataset.color;
+                    }
+                })
+
+
+
+            });
+        </script>
+    </head>
+    <body>
+        <h1 id="hello">Hello!</h1>
+        <!--
+        <button data-color="red">Red</button>
+        <button data-color="blue">Blue</button>
+        <button data-color="green">Green</button>
+        -->
+        <button data-color="red">Red</button>
+        <button data-color="blue">Blue</button>
+        <button data-color="green">Green</button>
+    </body>
+</html>

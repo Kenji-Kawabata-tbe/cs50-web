@@ -3,30 +3,28 @@
     <head>
         <title>Hello</title>
         <script>
-            function hello() {
-                // document.querySelectorはHTMLページの中身を見ることができる
-                // ==だけの場合、値が等しいかどうかのみをチェック。===の場合、値と型の両方が等しいかもチェックする。
-                //if (document.querySelector('h1').innerHTML === 'Hello!') {
-                //    document.querySelector('h1').innerHTML = 'Goodbye!';
-                //} else {
-                //    document.querySelector('h1').innerHTML = 'Hello!';
-                //}
 
-                // letは変数、constは定数。定数は変更できない。
-                // let heading = document.querySelector('h1');
-                const heading = document.querySelector('h1');
-                if (heading.innerHTML === 'Hello!') {
-                    heading.innerHTML = 'Goodbye!';
-                } else {
-                    heading.innerHTML = 'Hello!';
-                }
-            }
+            document.addEventListener('DOMContentLoaded', function() {
+
+                // formを送信したら
+                document.querySelector('form').onsubmit = function() {
+                    // idがnameの値をnameに代入
+                    const name = document.querySelector('#name').value;
+                    alert(`Hello, ${name}!`);
+                };
+
+            });
+
 
         </script>
     </head>
     <body>
         <h1>Hello!</h1>
-        <button onclick="hello()">Click Here</button>
+        <form>
+            <input autofocus id="name" placeholder="Name" type="text">
+            <input type="submit">
+
+        </form>
     </body>
 
 </html>
