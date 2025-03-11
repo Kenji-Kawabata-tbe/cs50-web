@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Tasks</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                //送信ボタンを最初は無効にしておく。フォームに値が入ったら押せるようにするため。
+                document.querySelector('#submit').disabled = true;
+
+                // onkeyup キーを入力して指がキーから離れたとき
+                document.querySelector('#task').onkeyup = () => {
+                    if (document.querySelector('#task').value.length > 0) {
+                        document.querySelector('#submit').disabled = false;
+                    } else {
+                        document.querySelector('#submit').disabled = true;
+                    }
+                }
+
+                document.querySelector('form').onsubmit = () => {
+                    const task = document.querySelector('#task').value;
+                    //console.log(task);
+                    //li要素のリストアイテムを作成
+                    const li = document.createElement('li');
+                    li.innerHTML = task;
+
+                    //tasksにliの値を追記していく
+                    document.querySelector('#tasks').append(li);
+                    //tasksに追記した後に、task(フォームの中)の値を空にする
+                    document.querySelector('#task').value = '';
+                    document.querySelector('#submit').disabled = true;
+
+
+                    // フォームの送信を止める
+                    return false;
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <h1>Tasks</h1>
+        <ul id="tasks">
+        </ul>
+        <form>
+            <input id="task" placeholder="New Task" type="text">
+            <input id="submit" type="submit">
+        </form>
+    </body>
+</html>

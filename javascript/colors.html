@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Colors</title>
+        <script>
+            //document.addEventListener('DOMContentLoaded', function() {
+              // アロー関数
+              // 関数の略語。矢印の左は関数の入力で右は関数が呼び出させれた時に実行されるコード
+              document.addEventListener('DOMContentLoaded', () => {
+                //document.querySelector('#red').onclick = function() {
+                //    document.querySelector('#hello').style.color = 'red';
+                //}
+                //document.querySelector('#blue').onclick = function() {
+                //    document.querySelector('#hello').style.color = 'blue';
+                //}
+                //document.querySelector('#green').onclick = function() {
+                //   document.querySelector('#hello').style.color = 'green';
+                //}
+
+                //すべてのbuttonを探す。forEachで返ってきた各ボタンに対して関数を実行する
+                //document.querySelectorAll('button').forEach(function(button) {
+                document.querySelectorAll('button').forEach(button => {
+                    //ボタンがクリックされたら
+                    button.onclick = function() {
+                        //#hello要素を取得し、その色をbutton.dataset.colorに変更する
+                        document.querySelector('#hello').style.color = button.dataset.color;
+                    }
+                })
+
+                document.querySelector('select').onchange = function() {
+                    // ここでのthisは変更されたイベント。つまりドロップダウンでユーザが選択した値。
+                    document.querySelector('#hello').style.color = this.value;
+                }
+
+
+
+            });
+        </script>
+    </head>
+    <body>
+        <h1 id="hello">Hello!</h1>
+        <!--
+        <button id="red">Red</button>
+        <button id="blue">Blue</button>
+        <button id="green">Green</button>
+        -->
+        <!--
+        <button data-color="red">Red</button>
+        <button data-color="blue">Blue</button>
+        <button data-color="green">Green</button>
+        -->
+        <select>
+            <option value="black">Black</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+        </select>
+
+    </body>
+</html>

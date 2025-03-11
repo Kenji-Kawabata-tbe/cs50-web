@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Currency Exchange</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('form').onsubmit = function() {
+                    //リクエスト 最新の為替レートを取得
+                    fetch('https://api.exchangeratesapi.io/latest?base=USD')
+                    //レスポンスが帰ってきたら、そのレスポンスをJSONに変換する。非同期処理。
+                    //.then(response => {
+                    //    return response.json()
+                    //})
+                    .then(response => response.json())
+                    //データを取得した後の処理
+                    .then(data => {
+                        //console.log(data);
+                        const currency = document.querySelector('#currency').value.toUpperCase();
+                        //const rate = data.rates.EUR;
+                        const rate = data.rates[currency];
+                        //rateが空じゃなければ
+                        if (rate !== undefined) {
+                            document.querySelector('#result').innerHTML = `1 USD is equal to ${rate.toFixed(3)} ${currency}.`;
+                        } else {
+                            document.querySelector('#result').innerHTML = 'Invalid currency.';
+                        }
+                    })
+                    .catch(error => {
+                        console.log('Error:', error);
+                    })
+                    
+                    return false;
+                }
+
+                ////リクエスト 最新の為替レートを取得
+                //fetch('https://api.exchangeratesapi.io/latest?base=USaD')
+                ////レスポンスが帰ってきたら、そのレスポンスをJSONに変換する。非同期処理。
+                ////.then(response => {
+                ////    return response.json()
+                ////})
+                //.then(response => response.json())
+                ////データを取得した後の処理
+                //.then(data => {
+                //    //console.log(data);
+                //    const rate = data.rates.EUR;
+                //    //document.querySelector('body').innerHTML = `1 USD is equal to ${rate} EUR.`;
+                //    document.querySelector('body').innerHTML = `1 USD is equal to ${rate.toFixed(3)} EUR.`;
+                //});
+            });
+
+        </script>
+    </head>
+    <body>
+        <form>
+            <input id="currency" placeholder="Currency" type="text">
+            <input type="submit" value="Convert">
+        </form>
+        <div id="result">
+
+        </div>
+    </body>
+</html>
