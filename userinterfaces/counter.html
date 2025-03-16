@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <title>Counter</title>
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script type="text/babel">
+
+
+            function App() {
+                // setCountは状態更新関数。
+                // React.useState(0)はuseState フックを使用してcountという状態（state）を作成しています。
+                // useState(0) の戻り値は 配列 [現在の状態, 状態を更新する関数] であり、それを分割代入で取り出しています。
+                //  count は現在の状態（カウントの値）。
+                //  setCount は count を更新するための関数。
+                const [count, setCount] = React.useState(0);
+
+                function updateCount() {
+                    setCount(count + 1);
+                }
+
+                return (
+                    <div>
+                        <div>{count}</div>
+                        <button onClick={updateCount}>Count</button>
+                    </div>
+                );
+            }
+            ReactDOM.render(<App />, document.querySelector("#app"));
+
+        </script>
+    </body>
+</html>

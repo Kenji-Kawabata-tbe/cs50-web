@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Animate</title>
+        <style>
+            /*アニメーションgrowは、最初はフォント20pxで始まり最後には100pxに変化する*/
+            /*
+            @keyframes grow {
+                from {
+                    font-size: 20px;
+                }
+                to {
+                    font-sizex: 100px;
+                }
+            }
+            */
+
+            /*
+            @keyframes move {
+                from {
+                    left: 0%;
+                }
+                to {
+                    left: 50%;
+                }
+            }
+            */
+
+            @keyframes move {
+                0% {
+                    left: 0%;
+                }
+                50% {
+                    left: 50%;
+                }
+                100% {
+                    left: 0%;
+                }
+            }
+
+            h1 {
+                /*名前*/
+                /*animation-name: grow;*/
+                animation-name: move;
+                /*継続期間*/
+                animation-duration: 2s;
+                /*アニメーションの方向*/
+                animation-fill-mode: forwards;
+                /*見出しに相対的な位置を指定する場合(relative)*/
+                position: relative;
+                /*アニメーションを複数回繰り返したい時は回数を指定する。無限の場合はinfinite*/
+                animation-iteration-count: infinite
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const h1 = document.querySelector('h1');
+                h1.style.animationPlayState = 'paused';
+
+                document.querySelector('button').onclick = () => {
+                    if (h1.style.animationPlayState === 'paused') {
+                        h1.style.animationPlayState = 'running'
+                    } else {
+                        h1.style.animationPlayState = 'paused';
+                    }
+                }
+
+            });
+        </script>
+    </head>
+    <body>
+        <button>Click Here!</button>
+        <h1>Welcome!</h1>
+    </body>
+</html>
