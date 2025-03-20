@@ -22,6 +22,7 @@ deactivate
 django-admin startproject lecture3
 
 # アプリ作成
+cd lecture3
 python manage.py startapp hello
 
 # lecture3/settings.pyのINSTALLED_APPSにhelloを追加する

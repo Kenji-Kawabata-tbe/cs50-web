@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <style>
+            #app {
+                text-align: center;
+                font-family: sans-serif;
+            }
+
+            #problem {
+                font-size: 72px;
+            }
+
+            .incorrect {
+                color: red;
+            }
+
+            #winner {
+                font-size: 72px;
+                color: green;
+            }
+
+        </style>
+        <title>Addition</title>
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script type="text/babel">
+
+
+            function App() {
+
+                //const [num1, setNum1] = React.useState(1);
+                //const [num2, setNum2] = React.useState(2);
+                const [state, setState] = React.useState({
+                    num1: 1,
+                    num2: 4,
+                    response: "",
+                    score: 0,
+                    incorrect: false
+                });
+
+
+                function inputKeyPress(event) {
+                    // 引数のイベント(この場合、押されたキー)がEnterなら
+                    if (event.key === "Enter") {
+                        // 入力された値をintに変換する。元々は文字列。
+                        const answer = parseInt(state.response);
+                        if (state.num1 + state.num2 === answer) {
+                            setState({
+                                // 他の全てのものにstateの既存の値を使う。ここではnum1,num2,response,score。
+                                ...state,
+                                // Math.random 0から1の数字をランダムで生成する
+                                // Math.ceil 数値が5.8だった場合に6に繰り上げる
+                                num1: Math.ceil(Math.random() * 10),
+                                num2: Math.ceil(Math.random() * 10),
+                                score: state.score + 1,
+                                response: "",
+                                incorrect: false
+                            });
+                        } else {
+                            setState({
+                                // 他の全てのものにstateの既存の値を使う。ここではnum1,num2,response,score。
+                                ...state,
+                                score: state.score - 1,
+                                response: "",
+                                incorrect: true
+                            });
+                        }
+                    }
+
+                };
+
+                function updateResponse(event) {
+                    setState({
+                        //num1: state.num1,
+                        //num2: state.num2,
+                        // 他の全てのものにstateの既存の値を使う。ここではnum1,num2,response,score。
+                        ...state,
+                        // event.target.value ユーザが入力した内容がそのまま反映される
+                        response: event.target.value
+
+                    })
+                };
+
+                if (state.score === 10) {
+                    return (
+                        <div id="winner">
+                            You won!
+                        </div>
+                    );
+                }
+
+                // returnのinput
+                // autFoucus 自動でそのフィールドを選択した状態にするか
+                // onKeyPress キーが入力されたら
+                // onChange 値が変更されたら
+                // className={state.incorrect ? "incorrect" : ""}
+                //   incorrectがtrueならばクラス名はincorrectでそれ以外の場合は空。
+                return (
+                    <div>
+                        <div className={state.incorrect ? "incorrect" : ""} id='problem'>{state.num1} + {state.num2}</div>
+                        <input autoFocus={true} onKeyPress={inputKeyPress} onChange={updateResponse} value={state.response} />
+                        <div>Score: {state.score}</div>
+                    </div>
+                );
+            }
+            ReactDOM.render(<App />, document.querySelector("#app"));
+
+        </script>
+    </body>
+</html>
