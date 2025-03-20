@@ -3,3 +3,6 @@
 20250314  26:24
 20250315  41:17
 20250316  lesson done
+
+foo@example.com
+foo@example.com
