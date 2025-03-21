@@ -32,3 +32,6 @@ python
 
 cd selenium/
 python tests.py
+
+cd testingandcicd/airline/
+docker-compose up
