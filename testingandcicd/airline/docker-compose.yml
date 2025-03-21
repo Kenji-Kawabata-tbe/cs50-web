@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+    db:
+        image: postgres
+
+    web:
+        # カレントにあるDockerfile
+        build: .
+        # カレントディレクトリが/usr/src/appディレクトリに対応
+        volumes:
+            - .:/usr/src/app
+        # コンテナのポート:ローカルのポート
+        ports:
+            - "8000:8000"
