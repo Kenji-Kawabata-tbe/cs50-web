@@ -1,4 +1,5 @@
 202050320 14:11
+202050321 lesson done
 
 cd airline/alrline
 python manage.py test
