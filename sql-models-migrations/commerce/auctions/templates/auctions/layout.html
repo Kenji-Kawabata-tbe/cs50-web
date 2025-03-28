@@ -18,6 +18,7 @@
         </div>
         <ul class="nav">
             <li class="nav-item">
+                <!-- "{% url 'index' %}"はビューindexへのリンクという意味。以降のurlもそれぞれ''のビューへのリンク-->
                 <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
             </li>
             {% if user.is_authenticated %}
