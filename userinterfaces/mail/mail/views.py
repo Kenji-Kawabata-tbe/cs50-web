@@ -13,13 +13,29 @@ from .models import User, Email
 def index(request):
 
     # Authenticated users view their inbox
-    # ユーザがログインしている場合
+    # この render() の中には request が渡されているので、テンプレート(inbox.html) からはrequest.userをそのまま使うことができます。
+    # Django では、テンプレートがレンダリングされるときに request オブジェクトが自動的にテンプレートコンテキストに含まれます（正確には、Django のテンプレートコンテキストプロセッサのおかげ）。
+    # 特に、以下が有効になっていれば：
+    # settings.py
+    #   TEMPLATES = [
+    #       {
+    #           ...
+    #           'OPTIONS': {
+    #               'context_processors': [
+    #                   ...
+    #                   'django.template.context_processors.request',
+    #                   ...
+    #               ],
+    #           },
+    #       },
+    #   ]
+    #   この request コンテキストプロセッサがあることで、テンプレート内でも {{ request.user }} や {{ request.path }} などが使えるようになります。
     if request.user.is_authenticated:
         return render(request, "mail/inbox.html")
 
     # Everyone else is prompted to sign in
-    # ユーザがログインしていない場合
     else:
+        # loginという名前付きURLパターン（name属性）に対応するURLへリダイレクト
         return HttpResponseRedirect(reverse("login"))
 
 
@@ -130,11 +146,15 @@ def email(request, email_id):
 
 
 def login_view(request):
+    # メソッドがPOSTSの場合は以下の分岐に入る。
+    # メソッドがGETの場合、つまりindexからのリダイレクトや直接/loginに来た場合は最後のelseに行く
     if request.method == "POST":
 
         # Attempt to sign user in
+        # login.htmlのフォームの <input name="email"> と request.POST["password"] に入力された値を取得。
         email = request.POST["email"]
         password = request.POST["password"]
+        # emailとpasswordでログイン認証
         user = authenticate(request, username=email, password=password)
 
         # Check if authentication successful
@@ -168,6 +188,8 @@ def register(request):
 
         # Attempt to create new user
         try:
+            # create_userはusername,email,passwordの引数を取る。
+            # なのでこの行はusername=email、email=email、password=passwordとなる。
             user = User.objects.create_user(email, email, password)
             user.save()
         except IntegrityError as e:
