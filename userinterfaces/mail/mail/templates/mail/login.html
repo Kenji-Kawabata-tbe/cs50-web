@@ -8,8 +8,10 @@
         <div>{{ message }}</div>
     {% endif %}
 
+    <!-- loginビューにpostでリクエスト-->
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
+        <!-- name="email" と name="password" の2つのフィールドを持ち、{% url 'login' %} に送信されます。-->
         <div class="form-group">
             <input autofocus class="form-control" type="email" name="email" placeholder="Email">
         </div>
