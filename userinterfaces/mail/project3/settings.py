@@ -81,6 +81,7 @@ DATABASES = {
     }
 }
 
+# User モデルとして mail.models.User を使う、という宣言
 AUTH_USER_MODEL = 'mail.User'
 
 # Password validation

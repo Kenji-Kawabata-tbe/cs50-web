@@ -2,6 +2,11 @@
 {% load static %}
 
 {% block body %}
+    <!--
+        ログイン済みのユーザー情報は request.user に自動で入る。
+        UserモデルはAbstractUserを継承しているので、標準のemailフィールドを持っている。
+        なので request.user.email と書けば、ログインユーザーのメールアドレスがそのまま使える
+    -->
     <h2>{{ request.user.email }}</h2>
 
     <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
