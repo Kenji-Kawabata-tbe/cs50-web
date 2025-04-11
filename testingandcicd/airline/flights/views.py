@@ -20,6 +20,7 @@ def flight(request, flight_id):
          # Passengerクラスのrelated_nameでpassengersを指定しているのでPassengerクラスのflightsを逆参照をしている
         "passengers": flight.passengers.all(),
         # このFlightに乗るPassengerを除外
+        # flights=flightはPassengerのflightsフィールドがflightインスタンスを持っているかどうかを確認します。
         "non_passengers": Passenger.objects.exclude(flights=flight).all()
     })
 

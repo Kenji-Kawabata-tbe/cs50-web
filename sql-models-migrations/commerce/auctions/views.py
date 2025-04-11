@@ -8,7 +8,10 @@ from .models import User, Listing, Bid, Comment, Watchlist, Category
 from django.contrib import messages
 
 def index(request):
+    # is_activeがTrueのListingモデルのオブジェクトを取得。
+    # create_listingではis_activeを指定していないなが、models.pyでデフォルトtrueになっている。
     listings = Listing.objects.filter(is_active=True)
+    # 上記のlistingsをindex.htmlの{% for listing in listings %}に当てはめている。
     return render(request, "auctions/index.html", {"listings": listings})
 
 
@@ -39,6 +42,7 @@ def logout_view(request):
 
 def register(request):
     if request.method == "POST":
+        # これは register.htmlの name="username" で送られてきた値を取得しています。他も同じ。
         username = request.POST["username"]
         email = request.POST["email"]
 
@@ -80,22 +84,29 @@ def create_listing(request):
         title = request.POST["title"]
         description = request.POST["description"]
         starting_bid = request.POST["starting_bid"]
+        # request.POST.get は任意項目
         category_name = request.POST.get("category")
         image_url = request.POST.get("image_url")
 
+        #get_or_create は、同じ名前のカテゴリがあればそれを取得。なければ新しく作る
         category, _ = Category.objects.get_or_create(name=category_name)
 
+        #Listingモデルの各項目を設定
         listing = Listing.objects.create(
             title=title,
             description=description,
             starting_bid=starting_bid,
             category=category,
             image_url=image_url,
+            # ログイン中のユーザーがその出品者になる。
             owner=request.user
         )
         return HttpResponseRedirect(reverse("index"))
 
+    # GETの場合。つまり、「最初にフォームページを開いたとき(ユーザーが出品ページにアクセスしたとき)」
+    # データベースにある全てのCategoryを取得します。
     categories = Category.objects.all()
+    # auctions/create.htmlを返す。上記で取得したcategoriesを渡す。
     return render(request, "auctions/create.html", {"categories": categories})
 
 @login_required
